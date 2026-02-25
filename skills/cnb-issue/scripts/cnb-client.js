@@ -83,7 +83,7 @@ async function createIssue(repo, issue) {
   const client = await getClient();
   const result = await client.apis.Issues.CreateIssue({
     repo: parseRepo(repo),
-    request: {
+    post_issue_form: {
       title: issue.title,
       body: issue.body || '',
       labels: issue.labels || [],
@@ -104,7 +104,7 @@ async function updateIssue(repo, number, updates) {
   const result = await client.apis.Issues.UpdateIssue({
     repo: parseRepo(repo),
     number: number,
-    request: updates
+    patch_issue_form: updates
   });
   return result.body || result.data;
 }
@@ -134,7 +134,7 @@ async function addAssignees(repo, number, assignees) {
   const result = await client.apis.Issues.PostIssueAssignees({
     repo: parseRepo(repo),
     number: number,
-    request: { assignees }
+    post_issue_assignees_form: { assignees }
   });
   return result.body || result.data;
 }
@@ -147,7 +147,7 @@ async function removeAssignees(repo, number, assignees) {
   const result = await client.apis.Issues.DeleteIssueAssignees({
     repo: parseRepo(repo),
     number: number,
-    request: { assignees }
+    delete_issue_assignees_form: { assignees }
   });
   return result.body || result.data;
 }
@@ -174,7 +174,7 @@ async function addLabels(repo, number, labels) {
   const result = await client.apis.Issues.PostIssueLabels({
     repo: parseRepo(repo),
     number: number,
-    request: { labels }
+    post_issue_labels_form: { labels }
   });
   return result.body || result.data;
 }
@@ -187,7 +187,7 @@ async function setLabels(repo, number, labels) {
   const result = await client.apis.Issues.PutIssueLabels({
     repo: parseRepo(repo),
     number: number,
-    request: { labels }
+    put_issue_labels_form: { labels }
   });
   return result.body || result.data;
 }
@@ -240,7 +240,7 @@ async function createComment(repo, number, body) {
   const result = await client.apis.Issues.PostIssueComment({
     repo: parseRepo(repo),
     number: number,
-    request: { body }
+    post_issue_comment_form: { body }
   });
   return result.body || result.data;
 }
@@ -267,7 +267,7 @@ async function updateComment(repo, number, commentId, body) {
     repo: parseRepo(repo),
     number: number,
     comment_id: commentId,
-    request: { body }
+    patch_issue_comment_form: { body }
   });
   return result.body || result.data;
 }
@@ -282,7 +282,7 @@ async function updateProperties(repo, number, properties) {
   const result = await client.apis.Issues.UpdateIssueProperties({
     repo: parseRepo(repo),
     number: number,
-    request: { properties }
+    issue_properties_form: { properties }
   });
   return result.body || result.data;
 }
