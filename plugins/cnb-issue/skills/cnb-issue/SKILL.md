@@ -14,9 +14,9 @@ description: |
 
 1. **安装依赖**
 
-   在 skill 的 `scripts` 目录下执行：
+   在 skill 根目录下执行：
    ```bash
-   cd <skill-base-directory>/scripts
+   cd <skill-base-directory>
    npm install
    ```
 
